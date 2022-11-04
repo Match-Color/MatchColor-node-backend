@@ -9,9 +9,27 @@ const uploadRouter = require('./routes/upload.js');
 const mypageRouter = require('./routes/mypage.js');
 const detailRouter = require('./routes/detail.js')
 
+const mongoose = require("mongoose");
+
 // app.get('/', (req, res) => {
 //     res.send('Hello, Express');
 // })
+
+
+// mongoDB 연결
+mongoose
+  .connect(process.env.mongoURI, {
+    //  useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
+  })
+  .then(() => console.log("MongoDB Connected..."))
+  .catch((err) => console.log(err));
+
+app.get("/", (req, res) => {
+  // 루트 디렉토리에 라우트
+  res.send("mongoDB 연결 완료"); // 출력
+});
+
+
 
 app.listen(app.get('port'), () =>{
     console.log(app.get('port'), '번 포트에서 대기 중')
