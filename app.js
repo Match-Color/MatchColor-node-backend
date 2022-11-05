@@ -1,25 +1,16 @@
 const express = require('express')
-const mongoose = require("mongoose");
+const connect = require('./models/index');
 const indexRouter = require("./routes/index");
+require('dotenv').config();
 
 const app = express(); //express 모듈을 실행해서 app 변수에 할당
-app.set('port', process.env.Port || 3000);
+app.set('port', process.env.PORT || 3000);
 
-// mongoDB 연결
-mongoose
-  .connect(process.env.mongoURI, {
-    //  useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
-  })
-  .then(() => console.log("MongoDB Connected..."))
-  .catch((err) => console.log(err));
+// 몽고디비 연결
+connect();
 
-app.get("/", (req, res) => {
-  // 루트 디렉토리에 라우트
-  res.send("mongoDB 연결 완료"); // 출력
-});
-
+// 라우터 연결
 app.use('/', indexRouter);
-
 
 app.listen(app.get('port'), () =>{
     console.log(app.get('port'), '번 포트에서 대기 중')
