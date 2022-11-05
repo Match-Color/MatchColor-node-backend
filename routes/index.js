@@ -6,5 +6,6 @@ router.use("/upload", require("./uploadRouter"));
 router.use("/mypage", require("./mypageRouter"));
 router.use("/login", require("./loginRouter"));
 router.use("/singup", require("./signupRouter"));
+router.use("/result", require("./resultRouter"));
 
 module.exports = router;
