@@ -6,7 +6,7 @@ const connect = () => {
   if (process.env.NODE_ENV !== 'production') {
     mongoose.set('debug', true);
   }
-  mongoose.connect('mongodb://Soyeon:thdus@localhost:27017/', { // process.env.MONGO_URI로 하면 연결이 끊김.
+  mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   }, (error) => {
