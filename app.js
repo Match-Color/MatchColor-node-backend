@@ -16,7 +16,6 @@ app.listen(app.get('port'), () =>{
     console.log(app.get('port'), '번 포트에서 대기 중')
 })
 
-
 // ETRI OPEN API 연결
 const fs = require('fs');
 const request = require("request");
@@ -25,7 +24,7 @@ const openApiURL = process.env.ETRI_URI;
 const access_key = process.env.ETRI_KEY;
 const CATEGORIES = ["upcloth", "pants"];
 const type = 'jpg';
-const imageFilePath = './test1.jpg';
+const imageFilePath = './test2.jpg';
 
 const imageData = fs.readFileSync(imageFilePath);
 const requestJson = {
@@ -61,8 +60,21 @@ request.post(options, function (error, response, body) {
       ];
       return prev;
   }, []);
-
   console.log(colors);
+
+  // 상의 rgb 값
+  const upcloth = colors[0].color.replace(/ /g, '').replace('(', '').replace(')', '').split(',', 3);
+  const upcloth_r = upcloth[0];
+  const upcloth_g = upcloth[1];
+  const upcloth_b = upcloth[2];
+  // 하의 rgb 값
+  const bottom = colors[1].color.replace(/ /g, '').replace('(', '').replace(')', '').split(',', 3);
+  const bottom_r = bottom[0];
+  const bottom_g = bottom[1];
+  const bottom_b = bottom[2];
+  console.log(upcloth_r );
+  console.log(bottom_b);
+  return colors;
 });
 
 module.exports = app;
