@@ -12,7 +12,19 @@ const usercolorSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Color",
     required: true,
-  }
+  },
+  r: {
+    type: Number,
+    required: true,
+  },
+  g: {
+    type: Number,
+    required: true,
+  },
+  b: {
+    type: Number,
+    required: true,
+  },
 });
 
 const userColor = mongoose.model('User', usercolorSchema);
